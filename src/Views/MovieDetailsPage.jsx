@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, Route } from 'react-router-dom';
+import { useParams, Route, NavLink } from 'react-router-dom';
 import * as moviesAPI from '../Services/movies-api';
 import Cast from './Cast';
 
@@ -30,6 +30,7 @@ export default function MovieDetailsPage() {
             )}
           </div>
           <hr />
+          <NavLink to="/movies/:movieId/cast">Cast</NavLink>
 
           <Route path="/movies/:movieId/cast">
             <Cast />

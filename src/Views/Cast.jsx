@@ -10,9 +10,6 @@ export default function Cast() {
     moviesAPI.fetchMovieActors(movieId).then(setCast);
   }, [movieId]);
   console.log(cast);
-  return (
-    <>
-      <p>{movieId}</p>
-    </>
-  );
+
+  return <>{cast && <ul></ul>}</>;
 }
