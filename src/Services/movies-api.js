@@ -13,13 +13,17 @@ export async function fetchTrendingFilms() {
 //     return fetchWithErrorHandling(`search/${movieName}?api_key=${YOUR_ACCESS_KEY}`)
 // }
 
-// export function fetchMovieDetails(movieId, movieName) {
-//     return fetchWithErrorHandling(`${movieName}/${movieId}?api_key=${YOUR_ACCESS_KEY}`)
-// }
+export async function fetchMovieDetailsById(movieId) {
+  return await axios
+    .get(`movie/${movieId}?api_key=${YOUR_ACCESS_KEY}`)
+    .then(res => res.data);
+}
 
-// export function fetchMovieActors(movieName, movieId) {
-//     return fetchWithErrorHandling(`${movieName}/${movieId}/credits?api_key=${YOUR_ACCESS_KEY}`)
-// }
+export async function fetchMovieActors(movieId) {
+  return await axios
+    .get(`movie/${movieId}/credits?api_key=${YOUR_ACCESS_KEY}`)
+    .then(res => res.data);
+}
 
 // export function fetchMovieReviews(movieName, movieId) {
 //     return fetchWithErrorHandling(`${movieName}/${movieId}/reviews?api_key=${YOUR_ACCESS_KEY}`)
