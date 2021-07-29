@@ -1,15 +1,29 @@
 import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import * as moviesAPI from '../Services/movies-api';
 
 export default function Cast() {
   const { movieId } = useParams();
-  const [cast, setCast] = useState();
+  const [casts, setCast] = useState([]);
+  console.log(casts);
 
   useEffect(() => {
     moviesAPI.fetchMovieActors(movieId).then(setCast);
   }, [movieId]);
-  console.log(cast);
 
-  return <>{cast && <ul></ul>}</>;
+  return (
+    <>
+      {casts &&
+        casts.map(cast => (
+          <li key={cast.id}>
+            <img
+              src={`https://image.tmdb.org/t/p/w185${cast.profile_path}`}
+              alt={cast.name}
+            />
+            <p>{cast.name}</p>
+            <p>Character: {cast.character}</p>
+          </li>
+        ))}
+    </>
+  );
 }

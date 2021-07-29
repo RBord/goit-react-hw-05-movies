@@ -9,9 +9,11 @@ export async function fetchTrendingFilms() {
     .then(res => res.data.results);
 }
 
-// export function fetchMovieByQuerry(movieName) {
-//     return fetchWithErrorHandling(`search/${movieName}?api_key=${YOUR_ACCESS_KEY}`)
-// }
+export async function fetchMovieByQuerry(movieName) {
+  return await axios
+    .get(`search/movie?api_key=${YOUR_ACCESS_KEY}&query=${movieName}`)
+    .then(res => res.data.results);
+}
 
 export async function fetchMovieDetailsById(movieId) {
   return await axios
@@ -22,9 +24,11 @@ export async function fetchMovieDetailsById(movieId) {
 export async function fetchMovieActors(movieId) {
   return await axios
     .get(`movie/${movieId}/credits?api_key=${YOUR_ACCESS_KEY}`)
-    .then(res => res.data);
+    .then(res => res.data.cast);
 }
 
-// export function fetchMovieReviews(movieName, movieId) {
-//     return fetchWithErrorHandling(`${movieName}/${movieId}/reviews?api_key=${YOUR_ACCESS_KEY}`)
-// }
+export async function fetchMovieReviews(movieId) {
+  return await axios
+    .get(`movie/${movieId}/reviews?api_key=${YOUR_ACCESS_KEY}`)
+    .then(res => res.data.results);
+}
