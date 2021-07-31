@@ -9,6 +9,7 @@ export default function HomePage() {
   useEffect(() => {
     moviesAPI.fetchTrendingFilms().then(setMovies);
   }, []);
+
   return (
     <>
       <h1>Trending today</h1>

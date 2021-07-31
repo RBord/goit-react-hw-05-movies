@@ -1,46 +1,63 @@
 import { useState, useEffect } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import * as moviesAPI from '../Services/movies-api';
 
 export default function MoviesPage() {
-  const { url } = useRouteMatch();
+  const location = useLocation();
+  const history = useHistory();
   const [movieName, setMovieName] = useState('');
   const [movies, setMovies] = useState([]);
-
-  const onHandleSubmit = newMovieQuerry => {
-    setMovieName(newMovieQuerry);
-    setMovies([]);
-  };
+  const searchQuerry = new URLSearchParams(location.search).get('query');
 
   useEffect(() => {
     if (movieName === '') return;
     async function getMoviesByQuerry() {
       try {
         moviesAPI.fetchMovieByQuerry(movieName).then(setMovies);
+        history.push({ ...location, search: `query=${movieName}` });
       } catch (error) {
         console.error('Что-то пошло не так!');
       }
     }
     getMoviesByQuerry();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [movieName]);
-  console.log(movies);
+
+  useEffect(() => {
+    if (searchQuerry) {
+      moviesAPI.fetchMovieByQuerry(searchQuerry).then(setMovies);
+    }
+  }, [searchQuerry]);
+
   return (
     <>
       <form
         onSubmit={e => {
           e.preventDefault();
-          onHandleSubmit(e.target.elements.movieName.value);
+          setMovieName(e.target.elements.movieName.value);
         }}
       >
-        <input type="text" name="movieName" />
-        <button>Search</button>
+        <input
+          type="text"
+          name="movieName"
+          autoFocus
+          placeholder="Search movies"
+        />
+        <button type="submit">Search</button>
       </form>
       <hr />
       {movies && (
         <ul>
           {movies.map(movie => (
             <li key={movie.id}>
-              <Link to={`${url}/${movie.id}`}>{movie.title}</Link>
+              <Link
+                to={{
+                  pathname: `/movies/${movie.id}`,
+                  state: { from: location },
+                }}
+              >
+                {movie.title}
+              </Link>
             </li>
           ))}
         </ul>
