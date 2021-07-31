@@ -28,7 +28,6 @@ export default function MoviesPage() {
       moviesAPI.fetchMovieByQuerry(searchQuerry).then(setMovies);
     }
   }, [searchQuerry]);
-
   return (
     <>
       <form

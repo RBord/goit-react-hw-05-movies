@@ -5,7 +5,6 @@ import * as moviesAPI from '../Services/movies-api';
 export default function Cast() {
   const { movieId } = useParams();
   const [casts, setCast] = useState([]);
-  console.log(casts);
 
   useEffect(() => {
     moviesAPI.fetchMovieActors(movieId).then(setCast);

@@ -14,6 +14,7 @@ import Reviews from './Reviews';
 export default function MovieDetailsPage() {
   const history = useHistory();
   const location = useLocation();
+
   const { url, path } = useRouteMatch();
   const { movieId } = useParams();
   const [movie, setMovie] = useState();
@@ -25,7 +26,7 @@ export default function MovieDetailsPage() {
   const onGoBack = () => {
     history.push(location?.state?.from ?? '/');
   };
-  console.log(history);
+
   return (
     <>
       {movie && (
@@ -57,10 +58,24 @@ export default function MovieDetailsPage() {
           <p>Additional information</p>
           <ul>
             <li>
-              <NavLink to={`${url}/${movieId}/cast`}>Cast </NavLink>
+              <NavLink
+                to={{
+                  pathname: `${url}/${movieId}/cast`,
+                  state: { from: location.state.from },
+                }}
+              >
+                Cast{' '}
+              </NavLink>
             </li>
             <li>
-              <NavLink to={`${url}/${movieId}/reviews`}>Reviews </NavLink>
+              <NavLink
+                to={{
+                  pathname: `${url}/${movieId}/reviews`,
+                  state: { from: location.state.from },
+                }}
+              >
+                Reviews{' '}
+              </NavLink>
             </li>
           </ul>
           <hr />
