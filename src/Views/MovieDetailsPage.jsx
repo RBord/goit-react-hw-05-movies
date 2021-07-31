@@ -3,6 +3,7 @@ import {
   useParams,
   Route,
   NavLink,
+  Switch,
   useRouteMatch,
   useLocation,
   useHistory,
@@ -60,32 +61,34 @@ export default function MovieDetailsPage() {
             <li>
               <NavLink
                 to={{
-                  pathname: `${url}/${movieId}/cast`,
+                  pathname: `${url}/cast`,
                   state: { from: location.state.from },
                 }}
               >
-                Cast{' '}
+                Cast
               </NavLink>
             </li>
             <li>
               <NavLink
                 to={{
-                  pathname: `${url}/${movieId}/reviews`,
+                  pathname: `${url}/reviews`,
                   state: { from: location.state.from },
                 }}
               >
-                Reviews{' '}
+                Reviews
               </NavLink>
             </li>
           </ul>
           <hr />
 
-          <Route path={`${path}/:movieId/cast`}>
-            <Cast />
-          </Route>
-          <Route path={`${path}/:movieId/reviews`}>
-            <Reviews />
-          </Route>
+          <Switch>
+            <Route path={`${path}/cast`}>
+              <Cast movieId={movieId} />
+            </Route>
+            <Route path={`${path}/reviews`}>
+              <Reviews movieId={movieId} />
+            </Route>
+          </Switch>
         </>
       )}
     </>

@@ -5,6 +5,7 @@ import * as moviesAPI from '../Services/movies-api';
 export default function MoviesPage() {
   const location = useLocation();
   const history = useHistory();
+
   const [movieName, setMovieName] = useState('');
   const [movies, setMovies] = useState([]);
   const searchQuerry = new URLSearchParams(location.search).get('query');
