@@ -1,0 +1,11 @@
+.link {
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.link:hover {
+  color: tomato;
+}
+.link:visited {
+  color: teal;
+}

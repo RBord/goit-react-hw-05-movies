@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useHistory } from 'react-router-dom';
-import * as moviesAPI from '../Services/movies-api';
-
+import * as moviesAPI from '../../Services/movies-api';
+import s from './MoviesPage.module.css';
 export default function MoviesPage() {
   const location = useLocation();
   const history = useHistory();
@@ -42,8 +42,11 @@ export default function MoviesPage() {
           name="movieName"
           autoFocus
           placeholder="Search movies"
+          className={s.input}
         />
-        <button type="submit">Search</button>
+        <button type="submit" className={s.button}>
+          Search
+        </button>
       </form>
       <hr />
       {movies && (
@@ -55,6 +58,7 @@ export default function MoviesPage() {
                   pathname: `/movies/${movie.id}`,
                   state: { from: location },
                 }}
+                className={s.link}
               >
                 {movie.title}
               </Link>

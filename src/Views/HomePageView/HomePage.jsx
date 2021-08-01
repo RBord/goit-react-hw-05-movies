@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import * as moviesAPI from '../Services/movies-api';
+import * as moviesAPI from '../../Services/movies-api';
+import s from './HomePage.module.css';
 
 export default function HomePage() {
   const location = useLocation();
@@ -22,6 +23,7 @@ export default function HomePage() {
                   pathname: `/movies/${movie.id}`,
                   state: { from: location },
                 }}
+                className={s.link}
               >
                 {movie.title}
               </Link>
