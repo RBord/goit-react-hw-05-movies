@@ -26,9 +26,8 @@ export default function App() {
   return (
     <Container>
       <Navigation />
-
-      <Suspense fallback={<h1>Загружаем...</h1>}>
-        <Switch>
+      <Switch>
+        <Suspense fallback={<h1>Загружаем инфо...</h1>}>
           <Route path="/" exact>
             <HomePage />
           </Route>
@@ -41,12 +40,12 @@ export default function App() {
             <MovieDetailsPage />
           </Route>
 
-          <Route>
-            <NotFoundView />
-          </Route>
           <Redirect to="/" />
-        </Switch>
-      </Suspense>
+        </Suspense>
+        <Route>
+          <NotFoundView />
+        </Route>
+      </Switch>
     </Container>
   );
 }

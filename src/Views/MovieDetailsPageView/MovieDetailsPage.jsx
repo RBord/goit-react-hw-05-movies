@@ -30,7 +30,7 @@ export default function MovieDetailsPage() {
   }, [movieId]);
 
   const onGoBack = () => {
-    history.push(location.state.from);
+    history.push(location.state?.from ?? '/');
   };
   return (
     <>
@@ -87,16 +87,16 @@ export default function MovieDetailsPage() {
           </ul>
           <hr />
 
-          <Suspense fallback={<h1>Загружаем инфо...</h1>}>
-            <Switch>
+          <Switch>
+            <Suspense fallback={<h1>Загружаем инфо...</h1>}>
               <Route path={`${path}/cast`}>
                 <Cast movieId={movieId} />
               </Route>
               <Route path={`${path}/reviews`}>
                 <Reviews movieId={movieId} />
               </Route>
-            </Switch>
-          </Suspense>
+            </Suspense>
+          </Switch>
         </>
       )}
     </>
