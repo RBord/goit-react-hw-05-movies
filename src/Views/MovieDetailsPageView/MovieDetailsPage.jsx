@@ -7,6 +7,7 @@ import {
   useRouteMatch,
   useLocation,
   useHistory,
+  Redirect,
 } from 'react-router-dom';
 import * as moviesAPI from '../../Services/movies-api';
 import s from './MovieDetailsPage.module.css';
@@ -30,12 +31,8 @@ export default function MovieDetailsPage() {
   }, [movieId]);
 
   const onGoBack = () => {
-    if (!location.state.from) {
-      history.push('/');
-    }
-    history.push(location.state?.from);
+    history.push(location.state.from);
   };
-  console.log(location.state.from);
   return (
     <>
       {movie && (
@@ -99,6 +96,7 @@ export default function MovieDetailsPage() {
               <Route path={`${path}/reviews`}>
                 <Reviews movieId={movieId} />
               </Route>
+              <Redirect to="/" />
             </Switch>
           </Suspense>
         </>
