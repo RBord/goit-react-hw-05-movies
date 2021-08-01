@@ -7,7 +7,6 @@ import {
   useRouteMatch,
   useLocation,
   useHistory,
-  Redirect,
 } from 'react-router-dom';
 import * as moviesAPI from '../../Services/movies-api';
 import s from './MovieDetailsPage.module.css';
@@ -96,7 +95,6 @@ export default function MovieDetailsPage() {
               <Route path={`${path}/reviews`}>
                 <Reviews movieId={movieId} />
               </Route>
-              <Redirect to="/" />
             </Switch>
           </Suspense>
         </>
