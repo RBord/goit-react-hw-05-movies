@@ -8,8 +8,10 @@ import {
   useLocation,
   useHistory,
 } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as moviesAPI from '../../Services/movies-api';
 import s from './MovieDetailsPage.module.css';
+
 const Cast = lazy(() =>
   import('../Cast/Cast' /* webpackChunkName: 'cast-info'*/),
 );
@@ -30,8 +32,9 @@ export default function MovieDetailsPage() {
   }, [movieId]);
 
   const onGoBack = () => {
-    history.push(location.state?.from ?? '/');
+    history.push(location.state?.from);
   };
+
   return (
     <>
       {movie && (
@@ -53,8 +56,8 @@ export default function MovieDetailsPage() {
               <h2>Genres</h2>
               {movie.genres && (
                 <ul>
-                  {movie.genres.map(genre => (
-                    <li key={genre.id}>{genre.name}</li>
+                  {movie.genres.map(({ name, id }) => (
+                    <li key={id}>{name}</li>
                   ))}
                 </ul>
               )}
@@ -103,3 +106,12 @@ export default function MovieDetailsPage() {
     </>
   );
 }
+
+MovieDetailsPage.propTypes = {
+  poster_path: PropTypes.string,
+  title: PropTypes.string,
+  vote_average: PropTypes.number,
+  overview: PropTypes.string,
+  id: PropTypes.number,
+  name: PropTypes.string,
+};

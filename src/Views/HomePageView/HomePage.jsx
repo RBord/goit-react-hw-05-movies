@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as moviesAPI from '../../Services/movies-api';
 import s from './HomePage.module.css';
 
@@ -16,16 +17,16 @@ export default function HomePage() {
       <h1>Trending today</h1>
       {movies && (
         <ul>
-          {movies.map(movie => (
-            <li key={movie.id}>
+          {movies.map(({ id, title }) => (
+            <li key={id}>
               <Link
                 to={{
-                  pathname: `/movies/${movie.id}`,
+                  pathname: `/movies/${id}`,
                   state: { from: location },
                 }}
                 className={s.link}
               >
-                {movie.title}
+                {title}
               </Link>
             </li>
           ))}
@@ -34,3 +35,8 @@ export default function HomePage() {
     </>
   );
 }
+
+HomePage.propTypes = {
+  id: PropTypes.number,
+  title: PropTypes.string,
+};

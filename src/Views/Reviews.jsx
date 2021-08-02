@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import * as moviesAPI from '../Services/movies-api';
+import PropTypes from 'prop-types';
 
 export default function Review({ movieId }) {
   const [reviews, setReviews] = useState([]);
@@ -13,10 +14,10 @@ export default function Review({ movieId }) {
     <>
       {reviews && (
         <ul>
-          {reviews.map(review => (
-            <li key={review.id}>
-              <h2>Author: {review.author}</h2>
-              <p>{review.content}</p>
+          {reviews.map(({ id, author, content }) => (
+            <li key={id}>
+              <h2>Author: {author}</h2>
+              <p>{content}</p>
             </li>
           ))}
         </ul>
@@ -26,3 +27,9 @@ export default function Review({ movieId }) {
     </>
   );
 }
+
+Review.propTypes = {
+  id: PropTypes.number,
+  author: PropTypes.string,
+  content: PropTypes.string,
+};

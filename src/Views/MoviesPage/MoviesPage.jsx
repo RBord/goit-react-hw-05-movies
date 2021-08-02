@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import * as moviesAPI from '../../Services/movies-api';
 import s from './MoviesPage.module.css';
+import PropTypes from 'prop-types';
+
 export default function MoviesPage() {
   const location = useLocation();
   const history = useHistory();
@@ -51,16 +53,16 @@ export default function MoviesPage() {
       <hr />
       {movies && (
         <ul>
-          {movies.map(movie => (
-            <li key={movie.id}>
+          {movies.map(({ id, title }) => (
+            <li key={id}>
               <Link
                 to={{
-                  pathname: `/movies/${movie.id}`,
+                  pathname: `/movies/${id}`,
                   state: { from: location },
                 }}
                 className={s.link}
               >
-                {movie.title}
+                {title}
               </Link>
             </li>
           ))}
@@ -69,3 +71,8 @@ export default function MoviesPage() {
     </>
   );
 }
+
+MoviesPage.propTypes = {
+  id: PropTypes.number,
+  title: PropTypes.string,
+};
